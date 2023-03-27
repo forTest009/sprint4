@@ -1,5 +1,4 @@
 package PageObject;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -78,7 +77,6 @@ public class OrderPage {
     public void clickBtnAgree() {
         driver.findElement(btnOrderAgree).click();
     }
-
     public void choosenStation(){
         clickSelectMetro();
         driver.findElement(metroItem);
@@ -90,7 +88,6 @@ public class OrderPage {
     public void setComments(String userComment) {
         driver.findElement(comments).sendKeys(userComment);
     }
-
 
     public void choosenCountDays() {
         driver.findElement(countDays).click();

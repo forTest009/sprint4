@@ -14,7 +14,6 @@ public class MainPage {
     public MainPage(WebDriver driver){
         this.driver = driver;
     }
-
     public String checkTextBodyAccordeon() {
         driver.findElement(accordionBody).getText();
         return checkTextBodyAccordeon();
