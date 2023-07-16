@@ -117,8 +117,7 @@ public class OrderPage {
         choosenColorBlack();
         setComments(comments);
         clickBtnNextSecondStep();
-      // Содержится баг в Chrome: отсутствие перехода на следующий шаг после клика на кнопку "Да"
-      //  clickBtnAgree();
-      //  clickBtnCheckStatus();
+        clickBtnAgree();
+        clickBtnCheckStatus();
     }
 }

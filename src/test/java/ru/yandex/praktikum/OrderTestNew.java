@@ -3,6 +3,7 @@ package ru.yandex.praktikum;
 import PageObject.MainPage;
 import PageObject.OrderPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,63 +17,59 @@ public class OrderTestNew {
     private final String nameUser;
     private final String surnameUser;
 
-    private final String adressUser;
+    private final String addressUser;
 
     private final String telUser;
 
     private final String dateOrder;
 
     private final String commentsUser;
-    private final boolean coincidence;
-    ;
 
-    public OrderTestNew(String nameUser, String surnameUser, String adressUser, String telUser, String dateOrder, String commentsUser, boolean coincidence) {
+    public OrderTestNew(String nameUser, String surnameUser, String addressUser, String telUser, String dateOrder, String commentsUser) {
         this.nameUser = nameUser;
         this.surnameUser = surnameUser;
-        this.adressUser = adressUser;
+        this.addressUser = addressUser;
         this.telUser = telUser;
         this.dateOrder = dateOrder;
         this.commentsUser = commentsUser;
-        this.coincidence= coincidence;
-
     }
 
     @Parameterized.Parameters
     public static Object[][] getTestData() {
         return new Object[][]{
-                {"Имя", "Фамилия", "Адрес", "+79090000000", "22.12.2023","неа", true},
-                {"НЕ имя", "Фамилия", "Адрес", "+79090000000", "22.12.2023","неа", true},
-
+                {"Имя", "Фамилия", "Адрес", "+79090000000", "22.12.2023","неа"},
+                {"ёёёёёёёёё", "ёёёёёёёёё", "ёёёёёёёёё", "+79090000000", "22.12.2023","ёёёёёёёёё"},
         };
     }
-
+    private WebDriver driver;
     @Before
     public void startUp() {
         WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
 
     }
     @Test
     public void newCheckActivityOrderInBody() {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://qa-scooter.praktikum-services.ru/");
         MainPage objMainPage = new MainPage(driver);
+        objMainPage.open();
         objMainPage.clickAgreeCookies();
         objMainPage.clickBtnInBody();
         OrderPage objOrderPage = new OrderPage(driver);
-        objOrderPage.fillFirstStep(nameUser, surnameUser, adressUser, telUser);
+        objOrderPage.fillFirstStep(nameUser, surnameUser, addressUser, telUser);
         objOrderPage.fillSecondStep(dateOrder, commentsUser);
-        driver.quit();
     }
     @Test
     public void newCheckActivityOrderInHeader() {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://qa-scooter.praktikum-services.ru/");
         MainPage objMainPage = new MainPage(driver);
+        objMainPage.open();
         objMainPage.clickAgreeCookies();
         objMainPage.clickBtnInHeader();
         OrderPage objOrderPage = new OrderPage(driver);
-        objOrderPage.fillFirstStep(nameUser, surnameUser, adressUser, telUser);
+        objOrderPage.fillFirstStep(nameUser, surnameUser, addressUser, telUser);
         objOrderPage.fillSecondStep(dateOrder, commentsUser);
+    }
+    @After
+    public void teardown(){
         driver.quit();
     }
 }
